@@ -1,0 +1,17 @@
+
+a, button {
+  @include box($black, $white);
+  cursor: pointer;
+  padding: 1vh 2vw;
+
+  &, &:active, &:focus, &:hover { outline: none; }
+
+  &.danger { @include box($black, $danger); }
+  &.full { width: 100%; }
+  &.info { @include box($black, $info); }
+  &.jumbo { font-size: 1.3rem; padding: 3vh 2vw; }
+  &.primary { @include box($black, $primary); }
+  &.secondary { @include box($black, $secondary); }
+  &.success { @include box($black, $success); }
+  &.warning { @include box($black, $warning); }
+}

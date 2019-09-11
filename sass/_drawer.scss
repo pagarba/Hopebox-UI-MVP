@@ -1,0 +1,33 @@
+
+.drawer {
+  @include cover-fixed();
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0;
+  position: fixed;
+  transition: $animation;
+  width: 64px;
+  z-index: 5;
+
+  &.open {
+    width: 20vw;
+
+    @media (min-width: $sm) {
+      right: initial;
+      width: 100vw;
+    }
+  }
+
+  a {
+    height: 64px;
+    line-height: 64px;
+    padding: 1vh 1vw;
+  }
+
+  .divider {
+    background-color: $gray;
+    height: 1px;
+    margin: 1vh 0;
+  }
+}

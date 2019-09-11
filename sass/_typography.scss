@@ -1,0 +1,12 @@
+
+html {
+  body {
+    color: $font-color;
+    font-family: $font-family;
+    font-size: $font-size;
+
+    &, a, a:active, a:focus, a:hover, button {
+      text-decoration: none;
+    }
+  }
+}

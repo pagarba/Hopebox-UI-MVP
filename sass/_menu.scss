@@ -1,0 +1,59 @@
+
+.navbar {
+  @include cover-fixed();
+  background-color: $black;
+  bottom: initial;
+  height: 10vh;
+  overflow: hidden;
+  z-index: 3;
+
+  @media (max-width: $sm) {
+    position: relative;
+  }
+
+  img, .logo {
+    height: 8vh;
+    width: auto;
+  }
+
+  ul {
+    list-style-type: none;
+
+    @media (max-width: $sm) {
+      display: none;
+    }
+
+    li {
+      display: inline-block;
+
+      a {
+        border: none;
+        font-size: 1rem;
+        line-height: 10vh;
+        margin: 0;
+        padding: 0 2vw;
+      }
+    }
+  }
+}
+
+.toolbar {
+  background-color: $secondary;
+
+  a {
+    background-color: $secondary;
+    border: 0;
+    color: $black;
+    padding: 0 1vw;
+
+    &:hover {
+      background-color: darken($secondary, 10%);
+    }
+
+    i, span {
+      font-size: 2vh;
+      height: 5vh;
+      line-height: 5vh;
+    }
+  }
+}

@@ -1,0 +1,87 @@
+
+html {
+  &, body {
+    background-color: $white;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+  }
+}
+
+.container {
+  height: 90vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+
+  &, .content {
+    margin-top: 10vh;
+    width: 100vw;
+  }
+}
+
+.cover {
+  @include cover-fixed();
+  background-color: $black;
+
+  &.splash {
+    img {
+      height: 20vh;
+      width: auto;
+    }
+
+    .loading {
+      animation-name: pulse;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+      color: $white;
+      text-align: center;
+    }
+  }
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+
+  &-around { justify-content: space-around; }
+  &-column { flex-direction: column; }
+  &-fill { flex: 1; }
+  &-row { flex-direction: row; }
+}
+
+.margin {
+  &-bottom { margin-bottom: 1vh; }
+  &-left { margin-left: 1vw; }
+  &-right { margin-right: 1vw; }
+  &-top { margin-top: 1vh; }
+
+  @each $size in $sizes {
+    &-bottom-#{$size} { margin-bottom: #{$size}vh; }
+    &-left-#{$size} { margin-left: #{$size}vw; }
+    &-right-#{$size} { margin-right: #{$size}vw; }
+    &-top-#{$size} { margin-top: #{$size}vh; }
+  }
+}
+
+.middle {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.padding {
+  &-bottom { padding-bottom: 1vh; }
+  &-left { padding-left: 1vw; }
+  &-right { padding-right: 1vw; }
+  &-top { padding-top: 1vh; }
+
+  @each $size in $sizes {
+    &-bottom-#{$size} { padding-bottom: #{$size}vh; }
+    &-left-#{$size} { padding-left: #{$size}vw; }
+    &-right-#{$size} { padding-right: #{$size}vw; }
+    &-top-#{$size} { padding-top: #{$size}vh; }
+  }
+}

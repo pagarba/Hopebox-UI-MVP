@@ -1,0 +1,23 @@
+
+.alert {
+  @include box($info, $black);
+
+  &.danger {}
+}
+
+.alerts {
+  @include cover-fixed();
+  left: initial;
+  width: 30vw;
+
+  @media (max-width: $sm) {
+    left: 0;
+    width: 100vw;
+  }
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+}

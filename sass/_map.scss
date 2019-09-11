@@ -1,0 +1,12 @@
+
+.map {
+  height: 90vh;
+  width: 100vw;
+
+  a {
+    padding: initial;
+  }
+
+  .leaflet-container { height: 85vh; }
+  .leaflet-touch .leaflet-control-attribution { display: none; }
+}

@@ -1,0 +1,23 @@
+
+@mixin box($bg, $fg) {
+  background-color: $bg;
+  border: 1px solid $fg;
+  color: $fg;
+  display: block;
+
+  &:hover {
+    background-color: $fg;
+    border-color: $bg;
+    color: $bg;
+  }
+}
+
+@mixin cover-fixed() {
+  bottom: 0;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100vw;
+}
