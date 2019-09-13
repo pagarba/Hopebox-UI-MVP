@@ -1,0 +1,49 @@
+
+.mobile {
+  background-color: $black;
+  bottom: 0;
+  color: $white;
+  font-size: 1rem;
+  line-height: 1.1rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40vw;
+  z-index: 9998;
+
+  .phone {
+    border: 1px solid lighten($black, 10%);
+    border-radius: 1rem;
+    height: 85vh;
+    margin: 1vh 1vw;
+    position: relative;
+
+    .body {
+      background-color: lighten($black, 5%);
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+      height: 70vh;
+    }
+
+    .foot {
+      background-color: lighten($black, 5%);
+      border-bottom-left-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+
+      i {
+        font-size: 5vh;
+        line-height: 10vh;
+      }
+    }
+
+    .head {
+      font-size: 2vh;
+      height: 4vh;
+      line-height: 4vh;
+      margin: 1vh 1vw;
+    }
+  }
+}

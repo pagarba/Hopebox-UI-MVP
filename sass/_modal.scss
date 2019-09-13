@@ -16,13 +16,6 @@
     top: 50vh;
     transform: translate(-50%, -50%);
 
-    @media (max-width: $sm) {
-      @include cover-fixed();
-      max-height: 100vh;
-      max-width: 100vw;
-      transform: none;
-    }
-
     .close {
       &, &:hover {
         background: none;

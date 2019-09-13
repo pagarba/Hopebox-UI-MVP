@@ -12,11 +12,6 @@
 
   &.open {
     width: 20vw;
-
-    @media (min-width: $sm) {
-      right: initial;
-      width: 100vw;
-    }
   }
 
   a {

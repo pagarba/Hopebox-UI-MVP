@@ -4,13 +4,8 @@
   "description": "HopeBox - Connecting Communities Saving Lives",
   "main": "./docs/index.html",
   "scripts": {
-    "build": "npm run build:core && npm run build:mobile && npm run build:web",
-    "build:core": "NODE_ENV=production webpack --config webpack.core.js",
-    "build:mobile": "NODE_ENV=production webpack --config webpack.mobile.js",
-    "build:web": "NODE_ENV=production webpack --config webpack.web.js",
-    "start:core": "NODE_ENV=development webpack-dev-server --config webpack.core.js",
-    "start:mobile": "NODE_ENV=development webpack-dev-server --config webpack.mobile.js",
-    "start:web": "NODE_ENV=development webpack-dev-server --config webpack.web.js",
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "start": "NODE_ENV=development webpack-dev-server --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

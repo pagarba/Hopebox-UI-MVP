@@ -9,11 +9,6 @@
   @include cover-fixed();
   left: initial;
   width: 30vw;
-
-  @media (max-width: $sm) {
-    left: 0;
-    width: 100vw;
-  }
 }
 
 .close {
