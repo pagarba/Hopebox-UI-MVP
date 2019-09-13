@@ -1,7 +1,15 @@
 
 import React from 'react'
 
+import {ucFirst} from '../common/Utils'
+
 import {Link} from 'react-router-dom'
+
+const links = [
+  'map',
+  'manage',
+  'settings',
+]
 
 const Navbar = props => (
   <div className="navbar">
@@ -9,15 +17,13 @@ const Navbar = props => (
       <li>
         <img alt="HopeBox" className="logo" src="img/logo.jpg" />
       </li>
-      <li>
-        <Link to="/map">Map</Link>
-      </li>
-      <li>
-        <Link to="/manage">Manage</Link>
-      </li>
-      <li>
-        <Link to="/settings">Settings</Link>
-      </li>
+      {links.map(link => (
+        <li
+          className={props.path.indexOf(`/${link}`) !== -1 ? 'active' : ''}
+          key={link}>
+          <Link to={`/${link}`}>{ucFirst(link)}</Link>
+        </li>
+      ))}
     </ul>
   </div>
 )

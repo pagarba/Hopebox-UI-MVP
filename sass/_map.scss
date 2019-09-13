@@ -7,6 +7,60 @@
     padding: initial;
   }
 
-  .leaflet-container { height: 85vh; }
+  .dropdown {
+    i {
+      padding-top: 2px;
+    }
+
+    .content {
+      background-color: $white;
+      border: 1px solid $secondary;
+      left: -1px;
+      top: -1px;
+
+      a {
+        border-color: $secondary;
+        font-size: 1rem;
+        height: 2.2rem;
+        line-height: 2rem;
+        margin: 0;
+        padding: 0 1vw;
+        text-align: left;
+        width: 100%;
+
+        &:hover {
+          background-color: darken($white, 5%);
+        }
+
+        img {
+          display: inline-block;
+          height: 3vh;
+          width: auto;
+        }
+      }
+
+      .title {
+        background-color: darken($white, 10%);
+      }
+    }
+  }
+
+  .leaflet {
+    &-bar {
+      border: 0 !important;
+      border-radius: 0 !important;
+    }
+
+    &-control {
+      background: $white !important;
+
+      &-create, &-layers-toggle, &-measure, &-zoom, &-zoom-in, &-zoom-out {
+        border: 1px solid $secondary !important;
+        border-radius: 0 !important;
+      }
+    }
+  }
+
+  .leaflet-container { height: 90vh; }
   .leaflet-touch .leaflet-control-attribution { display: none; }
 }

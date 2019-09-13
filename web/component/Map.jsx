@@ -7,6 +7,7 @@ import {
   FeatureGroup,
   LayersControl,
   Marker,
+  Polyline,
   Popup,
   TileLayer,
 } from 'react-leaflet'
@@ -35,7 +36,7 @@ export const BTS = props => (
   <FeatureGroup color={`rgba(100, 100, 255, 0.75)`}>
     <Marker
       icon={Icon({iconUrl: C.MAP.MARKER.BTS})}
-      position={[props.lat, props.lon]}>
+      position={{lat: props.lat, lon: props.lon}}>
       <Popup>
         <h4>BTS</h4>
         <div>ID: {props.id}</div>
@@ -43,10 +44,11 @@ export const BTS = props => (
         <div>Battery: {props.power}</div>
         <div>Range: {props.range || 0}</div>
         <div>Notes: {props.notes}</div>
+        <button onClick={() => props.onClick(props)}>MANAGE</button>
       </Popup>
     </Marker>
     <SemiCircle
-      position={[props.lat, props.lon]}
+      position={{lat: props.lat, lon: props.lon}}
       radius={props.range * 1000}
       startAngle={props.angle.start}
       stopAngle={props.angle.stop} />
@@ -57,7 +59,7 @@ export const CC = props => (
   <FeatureGroup color={C.MAP.COLOR.CC}>
     <Marker
       icon={Icon({iconUrl: C.MAP.MARKER.CC, iconSize: [42, 50]})}
-      position={[props.lat, props.lon]}>
+      position={{lat: props.lat, lon: props.lon}}>
       <Popup>
         <h4>CC</h4>
         <div>Language: {props.lang}</div>
@@ -66,18 +68,25 @@ export const CC = props => (
         <div>Notes: {props.notes}</div>
       </Popup>
     </Marker>
+    {props.links && props.links.map((link, i) => (
+      <Polyline
+        attribution={link.attribution}
+        key={i}
+        positions={[[props.lat, props.lon], link.position]} />
+    ))}
   </FeatureGroup>
 )
 
 export const Hazard = props => (
   <Marker
     icon={IconById(C.MAP.MARKER.HAZARD, props.type)}
-    position={[props.lat, props.lon]}>
+    position={{lat: props.lat, lon: props.lon}}>
     <Popup>
       <h4>Hazard</h4>
       <div>ID: {props.id}</div>
       <div>Type: {keyNameById(C.MAP.MARKER.HAZARD, props.type)}</div>
       <div>Notes: {props.notes}</div>
+      <button onClick={() => props.onClick(props)}>MANAGE</button>
     </Popup>
   </Marker>
 )
@@ -85,12 +94,13 @@ export const Hazard = props => (
 export const Location = props => (
   <Marker
     icon={IconById(C.MAP.MARKER.LOCATION, props.type)}
-    position={[props.lat, props.lon]}>
+    position={{lat: props.lat, lon: props.lon}}>
     <Popup>
       <h4>Location</h4>
       <div>ID: {props.id}</div>
       <div>Type: {keyNameById(C.MAP.MARKER.LOCATION, props.type)}</div>
       <div>Notes: {props.notes}</div>
+      <button onClick={() => props.onClick(props)}>MANAGE</button>
     </Popup>
   </Marker>
 )
@@ -98,7 +108,7 @@ export const Location = props => (
 export const Responder = props => (
   <Marker
     icon={Icon({iconUrl: C.MAP.MARKER.RESPONDER})}
-    position={[props.lat, props.lon]}>
+    position={{lat: props.lat, lon: props.lon}}>
     <Popup>
         <h4>Responder</h4>
         <div>ID: {props.id}</div>
@@ -109,7 +119,7 @@ export const Responder = props => (
         <div>Vehicle: {props.vehicle}</div>
         <div>Tags: {props.tags}</div>
         <div>Notes: {props.notes}</div>
-        <button onClick={() => props.onClick(props)}>Click</button>
+        <button onClick={() => props.onClick(props)}>MANAGE</button>
     </Popup>
   </Marker>
 )
@@ -117,7 +127,7 @@ export const Responder = props => (
 export const User = props => (
   <Marker
     icon={Icon({iconUrl: C.MAP.MARKER.USER.replace('{n}', props.esi)})}
-    position={[props.lat, props.lon]}>
+    position={{lat: props.lat, lon: props.lon}}>
     <Popup>
         <h4>User</h4>
         <div>ID: {props.id}</div>
@@ -127,6 +137,7 @@ export const User = props => (
         <div>MSISDN: {props.msisdn}</div>
         <div>Tags: {props.tags}</div>
         <div>Notes: {props.notes}</div>
+        <button onClick={() => props.onClick(props)}>MANAGE</button>
     </Popup>
   </Marker>
 )
@@ -134,12 +145,13 @@ export const User = props => (
 export const Vehicle = props => (
   <Marker
     icon={IconById(C.MAP.MARKER.VEHICLE, props.type)}
-    position={[props.lat, props.lon]}>
+    position={{lat: props.lat, lon: props.lon}}>
     <Popup>
       <h4>Vehicle</h4>
       <div>ID: {props.id}</div>
       <div>Type: {keyNameById(C.MAP.MARKER.VEHICLE, props.type)}</div>
       <div>Notes: {props.notes}</div>
+      <button onClick={() => props.onClick(props)}>MANAGE</button>
     </Popup>
   </Marker>
 )

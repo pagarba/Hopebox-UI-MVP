@@ -1,0 +1,35 @@
+
+form {
+  button {
+    margin-right: 1vw;
+
+    &[type="submit"], &[type="reset"] {
+
+    }
+  }
+
+  input, select, textarea {
+    color: $font-color;
+    font-size: $font-size;
+    margin: 0;
+    padding: 1vh 1vw;
+    width: 100%;
+  }
+
+  label {
+    font-size: 0.8rem;
+    line-height: 1rem;
+    width: 100%;
+  }
+
+  .error {
+    color: $danger;
+    font-size: 0.8rem;
+  }
+
+  .input-group {
+    flex: 1;
+    margin: 0;
+    padding: 1vh 1vw;
+  }
+}

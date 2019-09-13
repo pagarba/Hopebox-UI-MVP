@@ -1,10 +1,13 @@
 
 export default {
-  // Actions
+  // Alert
   ALERT: {
     CREATE: 'action.alert.create',
     DELETE: 'action.alert.delete',
   },
+  // Data
+  DATA: 'action.data',
+  // Modal
   MODAL: {
     BTS: 'action.modal.bts',
     HAZARD: 'action.modal.hazard',
@@ -13,13 +16,38 @@ export default {
     USER: 'action.modal.user',
     VEHICLE: 'action.modal.vehicle',
   },
-  RESPONDERS: 'action.responders',
-  STARTUP: 'action.startup',
-  USERS: 'action.users',
+  // BTS
+  BTS: {
+    CREATE: 'action.bts.create',
+    DELETE: 'action.bts.delete',
+    FREQUENCIES: [800, 900, 1800, 1900],
+    UPDATE: 'action.bts.update',
+  },
+  BTSS: 'action.bts.all',
   // CC
   CC: {
     DISTANCES: ['km', 'm'],
+    LANGUAGES: ['en_US'],
+    SET: 'action.cc',
   },
+  // Hazard
+  HAZARD: {
+    CREATE: 'action.hazard.create',
+    DELETE: 'action.hazard.delete',
+    UPDATE: 'action.hazard.update',
+  },
+  // Keys
+  KEY: {
+    CC: '@hopebox-cc',
+    CLICK: '@hopebox-click-geolocation',
+  },
+  // Location
+  LOCATION: {
+    CREATE: 'action.location.create',
+    DELETE: 'action.location.delete',
+    UPDATE: 'action.location.update',
+  },
+  LOCATIONS: 'action.location.all',
   // Map
   MAP: {
     COLOR: {
@@ -58,7 +86,7 @@ export default {
         AERIAL: 'img/marker/helicopter.png',
       },
     },
-    OFFSET: 0.0954321,
+    OFFSET: 0.0774321,
     POSITION: [34.052235, -118.243683],
     TILE_SERVERS: [
       {name: 'Carto Light', url: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'},
@@ -75,4 +103,28 @@ export default {
       {name: 'WMFLabs Hill Shading', url: 'http://tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png'},
     ],
   },
+  // Responder
+  RESPONDER: {
+    CREATE: 'action.responder.create',
+    DELETE: 'action.responder.delete',
+    UPDATE: 'action.responder.update',
+  },
+  RESPONDERS: 'action.responder.all',
+  // Splash
+  SPLASH: 3000,
+  // Startup
+  STARTUP: 'action.startup',
+  // User
+  USER: {
+    CREATE: 'action.user.create',
+    UPDATE: 'action.user.update',
+  },
+  USERS: 'action.user.all',
+  // Vehicle
+  VEHICLE: {
+    CREATE: 'action.vehicle.create',
+    DELETE: 'action.vehicle.delete',
+    UPDATE: 'action.vehicle.update',
+  },
+  VEHICLES: 'action.vehicle.all',
 }

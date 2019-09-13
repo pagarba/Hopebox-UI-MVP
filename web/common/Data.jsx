@@ -1,10 +1,9 @@
 
 import C from './Constants'
 import faker from 'faker'
+import {get} from './Utils'
 
 faker.locale = 'en_US'
-
-const freqs = [800, 900, 1800, 1900]
 
 const imsi = () => {
   let mac = faker.fake('{{internet.mac}}')
@@ -50,7 +49,7 @@ for(let i = 1; i <= 1000; i++) nums.push(i)
 
 const rand = n => Math.floor(Math.random() * n)
 
-const ranges = [18, 22]
+const ranges = [22]
 
 const startup = {
   bts: 0,
@@ -73,51 +72,57 @@ export default {
   bts: () => [
     {
       id: 1,
-      angle: {start: 215, stop: 260},
-      lat: C.MAP.POSITION[0] + 0.01,
-      lon: C.MAP.POSITION[1] - 0.05,
-      freq: freqs[rand(freqs.length)],
+      angle: {start: 250, stop: 285},
+      lat: C.MAP.POSITION[0] - 0.000,
+      lon: C.MAP.POSITION[1] - 0.001,
+      freq: C.BTS.FREQUENCIES[rand(C.BTS.FREQUENCIES.length)],
       power: rand(100),
       range: ranges[rand(ranges.length)],
     },
     {
       id: 2,
-      angle: {start: 180, stop: 250},
-      lat: C.MAP.POSITION[0] - 0.02,
-      lon: C.MAP.POSITION[1] - 0.025,
-      freq: freqs[rand(freqs.length)],
+      angle: {start: 220, stop: 255},
+      lat: C.MAP.POSITION[0] - 0.0005,
+      lon: C.MAP.POSITION[1] - 0.001,
+      freq: C.BTS.FREQUENCIES[rand(C.BTS.FREQUENCIES.length)],
       power: rand(100),
       range: ranges[rand(ranges.length)],
     },
     {
       id: 3,
-      angle: {start: 160, stop: 220},
-      lat: C.MAP.POSITION[0] - 0.02,
-      lon: C.MAP.POSITION[1] + 0.03,
-      freq: freqs[rand(freqs.length)],
+      angle: {start: 190, stop: 225},
+      lat: C.MAP.POSITION[0] - 0.001,
+      lon: C.MAP.POSITION[1] - 0.0005,
+      freq: C.BTS.FREQUENCIES[rand(C.BTS.FREQUENCIES.length)],
       power: rand(100),
       range: ranges[rand(ranges.length)],
     },
     {
       id: 4,
-      angle: {start: 120, stop: 280},
-      lat: C.MAP.POSITION[0] + 0.03,
-      lon: C.MAP.POSITION[1] + 0.025,
-      freq: freqs[rand(freqs.length)],
+      angle: {start: 160, stop: 195},
+      lat: C.MAP.POSITION[0] - 0.001,
+      lon: C.MAP.POSITION[1] - 0.000,
+      freq: C.BTS.FREQUENCIES[rand(C.BTS.FREQUENCIES.length)],
       power: rand(100),
-      range: ranges[rand(ranges.length)] / 2.0,
+      range: ranges[rand(ranges.length)],
     },
   ],
-  cc: () => ({
-    id: 1,
-    config: false,
-    lat: C.MAP.POSITION[0],
-    lon: C.MAP.POSITION[1],
-    lang: 'en_US',
-    ssid: '',
-    psk: '',
-    measure: 'm', // or km
-  }),
+  cc: () => {
+    const v = get(C.KEY.CC)
+    if (v) return v
+
+    return {
+      id: 1,
+      config: false,
+      lat: C.MAP.POSITION[0],
+      lon: C.MAP.POSITION[1],
+      lang: 'en_US',
+      ssid: '',
+      psk: '',
+      measure: 'm', // or km
+      notes: '',
+    }
+  },
   hazards: () => nums.slice(0, max.hazards).map(id => ({
     id,
     ...latLon(5000),
@@ -126,7 +131,7 @@ export default {
   })),
   locations: () => nums.slice(0, max.locations).map(id => ({
     id,
-    ...latLon(15000),
+    ...latLon(12000),
     type: types.locations[rand(types.locations.length)],
     notes: faker.fake('{{lorem.sentence}}'),
   })),
@@ -148,7 +153,7 @@ export default {
     esi: types.users[rand(types.users.length)],
     name: faker.fake('{{internet.userName}}'),
     bts: rand(max.bts),
-    ...latLon(rand(12000)),
+    ...latLon(rand(10000)),
     imsi: imsi(),
     msisdn: faker.fake('{{random.number}}'),
     notes: faker.fake('{{lorem.sentence}}'),

@@ -1,9 +1,11 @@
 
 import {connect} from 'react-redux'
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 
-import {setModal} from './common/Actions'
+import {setCC} from './common/Actions'
 
+import Modal from './container/Modal'
 import Navbar from './component/Navbar'
 import {Route, Switch} from 'react-router-dom'
 
@@ -17,6 +19,13 @@ import Splash from './container/Splash'
 import '../sass/main.scss'
 
 class App extends React.Component {
+  static getDerivedStateFromProps(props, state) {
+    if (!props.cc.config && props.location.pathname !== '/') {
+      props.history.push('/')
+    }
+    return null
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -30,8 +39,9 @@ class App extends React.Component {
     return (
       <div className="container">
         <Splash />
-        <Navbar onDrawer={this.handleDrawer} />
+        <Navbar onDrawer={this.handleDrawer} path={this.props.location.pathname} />
         <Alerts />
+        <Modal />
         <div className="content">
           <Switch>
             <Route component={Manage} path="/manage" />
@@ -46,11 +56,11 @@ class App extends React.Component {
 }
 
 const mapDispatch = dispatch => ({
-  handleModal: (v, t) => dispatch(setModal(v, t)),
+  handleCC: v => dispatch(setCC(v)),
 })
 
 const mapState = state => ({
-  modal: state.modal,
+  cc: state.cc,
 })
 
-export default connect(mapState, mapDispatch)(App)
+export default withRouter(connect(mapState, mapDispatch)(App))

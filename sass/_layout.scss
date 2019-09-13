@@ -25,7 +25,18 @@ html {
   @include cover-fixed();
   background-color: $black;
 
+  &.setup {
+    z-index: 9000;
+
+    .middle {
+      background-color: $white;
+      padding: 2vh 2vw;
+    }
+  }
+
   &.splash {
+    z-index: 9999;
+
     img {
       height: 20vh;
       width: auto;
@@ -52,6 +63,8 @@ html {
 }
 
 .margin {
+  margin: 1vh 1vw;
+
   &-bottom { margin-bottom: 1vh; }
   &-left { margin-left: 1vw; }
   &-right { margin-right: 1vw; }
@@ -73,6 +86,8 @@ html {
 }
 
 .padding {
+  padding: 1vh 1vw;
+
   &-bottom { padding-bottom: 1vh; }
   &-left { padding-left: 1vw; }
   &-right { padding-right: 1vw; }
@@ -84,4 +99,12 @@ html {
     &-right-#{$size} { padding-right: #{$size}vw; }
     &-top-#{$size} { padding-top: #{$size}vh; }
   }
+}
+
+.scroll {
+  margin: 0;
+  max-height: 90vh !important;
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+  padding: 0;
 }
