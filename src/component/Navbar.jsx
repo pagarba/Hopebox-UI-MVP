@@ -27,7 +27,7 @@ const Navbar = props => (
     </ul>
     {props.onMobile &&
       <ul className="right">
-        <li>
+        <li className={props.mobile ? 'active' : ''}>
           <a
             href="#"
             onClick={ev => {

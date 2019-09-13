@@ -3,7 +3,7 @@ import C from '../../common/Constants'
 import React from 'react'
 
 import Component from './Component'
-import {Form, Reset, Submit} from '../Form'
+import {Form, Submit} from '../Form'
 
 export default class SettingsForm extends Component {
   static defaultProps = {
@@ -78,9 +78,6 @@ export default class SettingsForm extends Component {
         input: 'textarea',
       },
     ],
-    deleteText: 'Delete',
-    resetText: 'Reset',
-    submitText: 'Submit',
   }
 
   render() {
@@ -102,7 +99,7 @@ export default class SettingsForm extends Component {
           {this.renderField(this.props.fields[6])}
         </div>
         <div className="flex flex-row flex-around">
-          <Submit onClick={this.handleSubmit} text={this.props.submitText} />
+          <Submit onClick={this.handleSubmit} />
         </div>
       </Form>
     )

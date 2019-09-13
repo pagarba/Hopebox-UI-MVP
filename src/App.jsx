@@ -47,6 +47,7 @@ class App extends React.Component {
           open={this.state.mobile}
           onClose={this.handleMobile} />
         <Navbar
+          mobile={this.state.mobile}
           open={this.state.drawer}
           onDrawer={this.handleDrawer}
           onMobile={this.handleMobile}

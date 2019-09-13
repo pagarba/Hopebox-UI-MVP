@@ -1,6 +1,33 @@
 
 import React, {useState} from 'react'
 
+export const Delete = props => {
+  const [verify, setVerify] = useState(false)
+  let timeout = null
+
+  const onClick = ev => {
+    ev.preventDefault()
+
+    if (verify) {
+      if (timeout) clearTimeout(timeout)
+
+      props.onClick(ev)
+      setVerify(false)
+    }
+
+    setVerify(true)
+    setTimeout(() => {
+      if (setVerify) setVerify(false)
+    }, 10000)
+  }
+
+  return (
+    <button className="danger" onClick={onClick}>
+      {verify ? 'Confirm?' : 'Delete'}
+    </button>
+  )
+}
+
 export const Input = props => {
   const [value, setValue] = useState(props.value || '')
 
@@ -59,7 +86,7 @@ export const Submit = props => (
     className="primary"
     onClick={props.onClick}
     type="submit">
-    {props.text}
+    Submit
   </button>
 )
 

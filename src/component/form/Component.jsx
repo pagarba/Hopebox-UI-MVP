@@ -5,6 +5,7 @@ import React from 'react'
 import {keys, get} from '../../common/Utils'
 
 import {
+  Delete,
   Form,
   Input,
   InputGroup,
@@ -17,8 +18,6 @@ import {
 export default class Component extends React.Component {
   static defaultProps = {
     fields: [],
-    resetText: 'Reset',
-    submitText: 'Submit',
   }
 
   constructor(props) {
@@ -153,13 +152,9 @@ export default class Component extends React.Component {
       <Form onSubmit={this.handleSubmit}>
         {this.props.fields.map(this.renderField)}
         <div className="flex flex-row flex-around">
-          <Submit onClick={this.handleSubmit} text={this.props.submitText} />
+          <Submit onClick={this.handleSubmit} />
           {!!this.state.data.id &&
-            <button
-              className="danger"
-              onClick={this.handleDelete}>
-              {this.props.deleteText}
-            </button>
+            <Delete onClick={this.handleDelete} />
           }
         </div>
       </Form>

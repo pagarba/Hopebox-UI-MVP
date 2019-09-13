@@ -5,7 +5,7 @@ import React from 'react'
 import {keys, ucFirst} from '../../common/Utils'
 
 import Component from './Component'
-import {Form, Reset, Submit} from '../Form'
+import {Delete, Form, Submit} from '../Form'
 
 export default class LocationForm extends Component {
   static defaultProps = {
@@ -50,9 +50,6 @@ export default class LocationForm extends Component {
         input: 'textarea',
       },
     ],
-    deleteText: 'Delete',
-    resetText: 'Reset',
-    submitText: 'Submit',
   }
 
   render() {
@@ -68,13 +65,9 @@ export default class LocationForm extends Component {
           {this.renderField(this.props.fields[3])}
         </div>
         <div className="flex flex-row flex-around">
-          <Submit onClick={this.handleSubmit} text={this.props.submitText} />
+          <Submit onClick={this.handleSubmit} />
           {!!this.state.data.id && !!this.props.onDelete &&
-            <button
-              className="danger"
-              onClick={this.handleDelete}>
-              {this.props.deleteText}
-            </button>
+            <Delete onClick={this.handleDelete} />
           }
         </div>
       </Form>
