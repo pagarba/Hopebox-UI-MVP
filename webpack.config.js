@@ -52,6 +52,7 @@ module.exports = {
       {from: 'assets/browserconfig.xml', to: 'browserconfig.xml'},
       {from: 'assets/favicon.ico', to: 'favicon.ico'},
       {from: 'assets/manifest.json', to: 'manifest.json'},
+      {from: 'assets/sw.js', to: 'sw.js'},
     ]),
   ],
   resolve: {

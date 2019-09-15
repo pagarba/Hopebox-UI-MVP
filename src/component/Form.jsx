@@ -3,22 +3,15 @@ import React, {useState} from 'react'
 
 export const Delete = props => {
   const [verify, setVerify] = useState(false)
-  let timeout = null
-
   const onClick = ev => {
     ev.preventDefault()
 
     if (verify) {
-      if (timeout) clearTimeout(timeout)
-
       props.onClick(ev)
       setVerify(false)
+    } else {
+      setVerify(true)
     }
-
-    setVerify(true)
-    setTimeout(() => {
-      if (setVerify) setVerify(false)
-    }, 10000)
   }
 
   return (

@@ -20,22 +20,85 @@
 
     .body {
       background-color: lighten($black, 5%);
-      border-top-left-radius: 1rem;
-      border-top-right-radius: 1rem;
+      border-radius: 1rem;
+      color: $white;
       height: 70vh;
+      position: relative;
+
+      .dial {
+        background-color: darken($white, 10%);
+        bottom: 0;
+        color: $black;
+        left: 0;
+        padding: 1vh 1vw;
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        .number {
+          color: $black;
+          font-size: 8vh;
+          height: 10vh;
+          line-height: 12vh;
+          padding: 1vh 1vw;
+          margin-bottom: 2vh;
+          text-align: right;
+        }
+
+        .numbers {
+          background-color: $white;
+          text-align: center;
+
+          a {
+            border: 1px solid $secondary;
+            color: $secondary;
+            flex: 1;
+            font-size: 6vh;
+            height: 10vh;
+            line-height: 10vh;
+            margin: 0;
+            padding: 0;
+            width: 1rem;
+
+            &:hover {
+              border-color: $black;
+              color: $black;
+
+              &.danger, &.success { color: $white; }
+              &.danger { border-color: $danger; }
+              &.success { border-color: $success; }
+            }
+          }
+        }
+      }
+
+      .ussd {
+        background-color: $white;
+        border: 1px solid $black;
+        box-shadow: 0 2px 5px rgba($black, 0.5);
+        color: $black;
+        padding: 1vh 1vw;
+
+        .message {
+          padding: 1vh 0;
+        }
+
+        .title {
+          border-bottom: 1px solid $secondary;
+          font-weight: bold;
+          padding: 1vh 0;
+        }
+      }
     }
 
     .foot {
-      background-color: lighten($black, 5%);
-      border-bottom-left-radius: 1rem;
-      border-bottom-right-radius: 1rem;
       margin: 0;
       padding: 0;
       text-align: center;
 
       i {
         font-size: 5vh;
-        line-height: 10vh;
+        line-height: 8vh;
       }
     }
 
@@ -44,6 +107,10 @@
       height: 4vh;
       line-height: 4vh;
       margin: 1vh 1vw;
+    }
+
+    .middle {
+      width: 90%;
     }
   }
 }

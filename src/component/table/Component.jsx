@@ -41,7 +41,7 @@ export default class Component extends React.Component {
   render() {
     if (!this.state.total) {
       return (
-        <table>
+        <table key="actual-table">
           <TableHead>
             <TableRow>
               {this.props.cols.map(col => (

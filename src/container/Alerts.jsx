@@ -12,9 +12,9 @@ class Alerts extends React.Component {
       <div className="alerts">
         {this.props.alerts.map(alert => (
           <Alert
+            {...alert}
             key={alert.id}
-            message={alert.message}
-            onClick={this.handleDelete} />
+            onClick={this.props.handleDelete} />
         ))}
       </div>
     )

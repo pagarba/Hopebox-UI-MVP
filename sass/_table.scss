@@ -14,12 +14,12 @@ table {
       margin: 0;
       padding: 0;
 
-      &:hover {
-        background-color: darken($white, 10%);
-      }
-
       &:nth-child(even) {
         background-color: darken($white, 5%);
+      }
+
+      &:hover {
+        background-color: darken($white, 10%);
       }
 
       td {
@@ -44,7 +44,7 @@ table {
 
           &:hover {
             background: none;
-            color: $primary;
+            color: $success;
           }
         }
       }
@@ -56,7 +56,7 @@ table {
     padding: 0;
 
     tr {
-      background-color: $secondary;
+      background-color: darken($white, 20%);
       color: $black;
       height: 5vh;
       margin: 0;
@@ -83,7 +83,7 @@ table {
     &, a {
       background: none;
       border: none;
-      color: $black;
+      color: $secondary;
       display: inline-block;
       font-size: 1rem;
       line-height: 1.1rem;
@@ -93,6 +93,8 @@ table {
     }
 
     a {
+      color: $black;
+
       &:hover {
         color: $secondary;
       }

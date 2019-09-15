@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import React from 'react'
 import {Redirect, Route, Switch, withRouter} from 'react-router-dom'
 
-import {setData, setModal} from '../common/Actions'
+import {setData, setDemo, setModal} from '../common/Actions'
 import {ucFirst} from '../common/Utils'
 
 import BTS from '../component/table/BTS'
@@ -16,8 +16,16 @@ import Vehicle from '../component/table/Vehicle'
 
 class Manage extends React.Component {
   static getDerivedStateFromProps(props, state) {
-    state.section = props.location.pathname.replace('/manage/', '')
-    return state
+    if (!props.demo) {
+      props.handleDemo(true)
+    }
+
+    const section = props.location.pathname.replace('/manage/', '')
+    if (section !== state.section) {
+      state.section = section
+      return state
+    }
+    return null
   }
 
   constructor(props) {
@@ -36,24 +44,26 @@ class Manage extends React.Component {
   }
 
   handleData = (ev, row) => {
-    ev.preventDefault()
+    if (ev.preventDefault) ev.preventDefault()
 
     return this.props.handleData(row)
-      .then(() => {
-        if (this.state.section === 'bts') {
-          return this.props.handleModal(true, C.MODAL.BTS)
-        } else if (this.state.section === 'hazards') {
-          return this.props.handleModal(true, C.MODAL.HAZARD)
-        } else if (this.state.section === 'locations') {
-          return this.props.handleModal(true, C.MODAL.LOCATION)
-        } else if (this.state.section === 'responders') {
-          return this.props.handleModal(true, C.MODAL.RESPONDER)
-        } else if (this.state.section === 'users') {
-          return this.props.handleModal(true, C.MODAL.USER)
-        } else if (this.state.section === 'vehicles') {
-          return this.props.handleModal(true, C.MODAL.VEHICLE)
-        }
-    })
+      .then(() => this.handleModal(true))
+  }
+
+  handleModal = v => {
+    if (this.state.section === 'bts') {
+      return this.props.handleModal(v, C.MODAL.BTS)
+    } else if (this.state.section === 'hazards') {
+      return this.props.handleModal(v, C.MODAL.HAZARD)
+    } else if (this.state.section === 'locations') {
+      return this.props.handleModal(v, C.MODAL.LOCATION)
+    } else if (this.state.section === 'responders') {
+      return this.props.handleModal(v, C.MODAL.RESPONDER)
+    } else if (this.state.section === 'users') {
+      return this.props.handleModal(v, C.MODAL.USER)
+    } else if (this.state.section === 'vehicles') {
+      return this.props.handleModal(v, C.MODAL.VEHICLE)
+    }
   }
 
   handlePage = page => this.setState({page})
@@ -78,7 +88,7 @@ class Manage extends React.Component {
     }
 
     return (
-      <Comp onClick={console.log} rows={rows} />
+      <Comp key="table" onClick={console.log} rows={rows} />
     )
   }
 
@@ -97,6 +107,14 @@ class Manage extends React.Component {
           ))}
         </div>
         <div className="table flex-fill scroll">
+          {this.state.section !== 'bts' && this.state.section !== 'users' &&
+            <div className="flex flex-row">
+              <button className="" onClick={ev => this.handleData(ev, {})}>
+                Create
+              </button>
+              <div className="flex-fill" />
+            </div>
+          }
           <Switch>
             <Route component={() => this.renderTable(BTS)} path="/manage/bts" />
             <Route component={() => this.renderTable(Hazard)} path="/manage/hazards" />
@@ -114,11 +132,13 @@ class Manage extends React.Component {
 
 const mapDispatch = dispatch => ({
   handleData: v => dispatch(setData(v)),
+  handleDemo: v => dispatch(setDemo(v)),
   handleModal: (v, t) => dispatch(setModal(v, t)),
 })
 
 const mapState = state => ({
   bts: state.bts,
+  demo: state.demo,
   hazards: state.hazards,
   locations: state.locations,
   responders: state.responders,

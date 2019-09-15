@@ -1,5 +1,18 @@
 
 html {
+  a {
+    background: none;
+    border: none;
+    color: $primary;
+    font-size: 1rem;
+
+    &:active, &:focus, &:hover {
+      background: none;
+      border: none;
+      color: $success;
+    }
+  }
+
   body {
     color: $font-color;
     font-family: $font-family;

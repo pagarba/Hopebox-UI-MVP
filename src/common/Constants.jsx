@@ -30,6 +30,8 @@ export default {
     LANGUAGES: ['en_US'],
     SET: 'action.cc',
   },
+  // Demo
+  DEMO: 'action.demo',
   // Hazard
   HAZARD: {
     CREATE: 'action.hazard.create',

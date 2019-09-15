@@ -116,9 +116,6 @@ export default class BTSForm extends Component {
         </div>
         <div className="flex flex-row flex-around">
           <Submit onClick={this.handleSubmit} />
-          {!!this.state.data.id && !!this.props.onDelete &&
-            <Delete onClick={this.handleDelete} />
-          }
         </div>
       </Form>
     )

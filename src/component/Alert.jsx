@@ -8,7 +8,10 @@ const Alert = props => (
       <a
         className="close"
         href="#"
-        onClick={() => props.onClick(props.id)}>&close;</a>
+        onClick={ev => {
+          ev.preventDefault()
+          props.onClick(props.id)
+        }}>X</a>
     }
   </div>
 )

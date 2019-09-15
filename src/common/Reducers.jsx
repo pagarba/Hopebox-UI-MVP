@@ -1,7 +1,9 @@
 
 import C from './Constants'
 import {combineReducers} from 'redux';
+
 import Data from './Data'
+import {get} from './Utils'
 
 const alerts = (state = [], {payload, type}) => {
   if (type === C.ALERT.CREATE) {
@@ -28,7 +30,8 @@ const bts = (state = Data.bts(), {payload, type}) => {
   return state
 }
 
-const cc = (state = Data.cc(), {payload, type}) => {
+const _cc = get(C.KEY.CC)
+const cc = (state = _cc ? _cc : {}, {payload, type}) => {
   if (type === C.CC.SET) {
     return {...payload}
   }
@@ -42,7 +45,14 @@ const data = (state = null, {payload, type}) => {
   return state
 }
 
-const hazards = (state = Data.hazards(), {payload, type}) => {
+const demo = (state = false, {payload, type}) => {
+  if (type === C.DEMO) {
+    return payload
+  }
+  return state
+}
+
+const hazards = (state = [], {payload, type}) => {
   if (type === C.HAZARDS) {
     return [...payload]
   } else if (type === C.HAZARD.CREATE) {
@@ -58,7 +68,7 @@ const hazards = (state = Data.hazards(), {payload, type}) => {
   return state
 }
 
-const locations = (state = Data.locations(), {payload, type}) => {
+const locations = (state = [], {payload, type}) => {
   if (type === C.LOCATIONS) {
     return [...payload]
   } else if (type === C.LOCATION.CREATE) {
@@ -100,7 +110,7 @@ const modal = (state = {
   }
 }
 
-const responders = (state = Data.responders(), {payload, type}) => {
+const responders = (state = [], {payload, type}) => {
   if (type === C.RESPONDERS) {
     return [...payload]
   } else if (type === C.RESPONDER.CREATE) {
@@ -121,7 +131,7 @@ const startup = (state = true, {payload, type}) => {
   return state
 }
 
-const users = (state = Data.users(), {payload, type}) => {
+const users = (state = [], {payload, type}) => {
   if (type === C.USERS) {
     return [...payload]
   } else if (type === C.USER.CREATE) {
@@ -137,7 +147,7 @@ const users = (state = Data.users(), {payload, type}) => {
   return state
 }
 
-const vehicles = (state = Data.vehicles(), {payload, type}) => {
+const vehicles = (state = [], {payload, type}) => {
   if (type === C.VEHICLES) {
     return [...payload]
   } else if (type === C.VEHICLE.CREATE) {
@@ -158,6 +168,7 @@ export default combineReducers({
   bts,
   cc,
   data,
+  demo,
   hazards,
   locations,
   modal,

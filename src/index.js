@@ -23,3 +23,12 @@ render((
     </HashRouter>
   </Provider>
 ), document.getElementById('app-root'))
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js')
+    .catch(err => console.log('react app load error:', err))
+
+  navigator.serviceWorker.addEventListener('message', ev => {
+    store.dispatch(ev.data)
+  })
+}

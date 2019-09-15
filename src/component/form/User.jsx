@@ -38,7 +38,7 @@ export default class UserForm extends Component {
           value: 5,
         },
         input: 'select',
-        validate: {max: 4, min: 1, required: true},
+        validate: {max: 5, min: 1, required: true},
       },
       {
         props: {
@@ -48,7 +48,7 @@ export default class UserForm extends Component {
           value: '',
         },
         input: 'input',
-        validate: {max: 15, min: 15, required: true},
+        validate: {required: true},
       },
       {
         props: {

@@ -37,7 +37,7 @@ export default class ResponderForm extends Component {
           value: '',
         },
         input: 'input',
-        validate: {max: 15, min: 15, required: true},
+        validate: {required: true},
       },
       {
         props: {

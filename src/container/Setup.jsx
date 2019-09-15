@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import React from 'react'
 import {withRouter} from 'react-router-dom'
 
-import {setCC} from '../common/Actions'
+import {setCC, setDemo} from '../common/Actions'
 
 import SettingsForm from '../component/form/Settings'
 
@@ -18,7 +18,10 @@ class Setup extends React.Component {
     ssid: data.ssid,
     psk: data.psk,
     notes: data.notes,
-  }).then(() => this.props.history.push('/map'))
+  }).then(() => {
+    this.props.handleDemo(true)
+    this.props.history.push('/map')
+  })
 
   render() {
     return (
@@ -37,6 +40,7 @@ class Setup extends React.Component {
 
 const mapDispatch = dispatch => ({
   handleCC: v => dispatch(setCC(v)),
+  handleDemo: v => dispatch(setDemo(v)),
 })
 
 const mapState = state => ({

@@ -1,17 +1,58 @@
 
+@mixin alert-color($bg, $fg) {
+  background-color: $bg;
+  border: 1px solid $bg;
+  color: $fg;
+
+  .close {
+    color: $fg;
+
+    &:hover {
+      background-color: $fg;
+      color: $bg;
+    }
+  }
+}
+
 .alert {
   @include box($info, $black);
+  font-size: 1rem;
+  margin: 0 0 1vh 0;
+  padding: 1vh 1vw;
+  position: relative;
 
-  &.danger {}
+  &.danger {
+    @include alert-color($danger, $white);
+  }
+
+  &.info {
+    @include alert-color($info, $white);
+  }
+
+  &.success {
+    @include alert-color($success, $white);
+  }
+
+  &.warning {
+    @include alert-color($warning, $white);
+  }
 }
 
 .alerts {
   @include cover-fixed();
-  left: initial;
+  height: fit-content;
+  left: 0;
+  max-height: 90vh;
+  top: 10vh;
   width: 30vw;
+  z-index: 6000;
 }
 
 .close {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 1vh 1vw;
   position: absolute;
   right: 0;
   top: 0;

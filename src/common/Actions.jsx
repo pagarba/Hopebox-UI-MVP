@@ -24,6 +24,7 @@ export const createBTS = payload => dispatch => {
 }
 export const updateBTS = payload => dispatch => {
   dispatch({payload, type: C.BTS.UPDATE})
+  createAlert({message: 'BTS updated successfully!', type: 'success'})(dispatch)
   return Promise.resolve()
 }
 
@@ -32,6 +33,7 @@ export const updateBTS = payload => dispatch => {
 export const setCC = payload => dispatch => {
   set(C.KEY.CC, payload)
   dispatch({payload, type: C.CC.SET})
+  createAlert({message: 'CC updated successfully!', type: 'success'})(dispatch)
   return Promise.resolve()
 }
 
@@ -54,9 +56,23 @@ export const setData = v => dispatch => {
   return Promise.resolve()
 }
 
+// Demo
+
+let timeout = null
+export const setDemo = payload => dispatch => {
+  if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({start: true})
+    dispatch({payload, type: C.DEMO})
+    return Promise.resolve()
+  }
+
+  if (timeout) clearTimeout(timeout)
+  timeout = setTimeout(() => dispatch(setDemo(payload)), 3000)
+}
+
 // Hazard
 
-let hazardId = 0
+let hazardId = 10000
 export const createHazard = payload => dispatch => {
   hazardId++
   payload.id = hazardId
@@ -69,12 +85,13 @@ export const deleteHazard = payload => dispatch => {
 }
 export const updateHazard = payload => dispatch => {
   dispatch({payload, type: C.HAZARD.UPDATE})
+  createAlert({message: 'Hazard updated successfully!', type: 'success'})(dispatch)
   return Promise.resolve()
 }
 
 // Location
 
-let locationId = 0
+let locationId = 10000
 export const createLocation = payload => dispatch => {
   locationId++
   payload.id = locationId
@@ -100,7 +117,7 @@ export const setModal = (payload, type) => dispatch => {
 
 // Responder
 
-let responderId = 0
+let responderId = 10000
 export const createResponder = payload => dispatch => {
   responderId++
   payload.id = responderId
@@ -130,7 +147,9 @@ export const setStartup = payload => dispatch => {
 // User
 
 export const createUser = payload => dispatch => {
-  dispatch({payload, type: C.USER.CREATE})
+  if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({payload, type: C.USER.CREATE})
+  }
   return Promise.resolve()
 }
 export const updateUser = payload => dispatch => {
@@ -140,7 +159,7 @@ export const updateUser = payload => dispatch => {
 
 // Vehicle
 
-let vehicleId = 0
+let vehicleId = 10000
 export const createVehicle = payload => dispatch => {
   vehicleId++
   payload.id = vehicleId
@@ -154,38 +173,4 @@ export const deleteVehicle = payload => dispatch => {
 export const updateVehicle = payload => dispatch => {
   dispatch({payload, type: C.VEHICLE.UPDATE})
   return Promise.resolve()
-}
-
-export default {
-  // Alert
-  createAlert,
-  deleteAlert,
-  // BTS
-  createBTS,
-  updateBTS,
-  // CC
-  setCC,
-  // Hazard
-  createHazard,
-  deleteHazard,
-  updateHazard,
-  // Location
-  createLocation,
-  deleteLocation,
-  updateLocation,
-  // Modal,
-  setModal,
-  // Responder
-  createResponder,
-  deleteResponder,
-  updateResponder,
-  // Startup,
-  setStartup,
-  // User
-  createUser,
-  updateUser,
-  // Vehicle
-  createVehicle,
-  deleteVehicle,
-  updateVehicle,
 }

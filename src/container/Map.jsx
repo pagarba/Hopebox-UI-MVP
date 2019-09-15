@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import React from 'react'
 import {set} from '../common/Utils'
 
-import {setData, setModal} from '../common/Actions'
+import {setData, setDemo, setModal} from '../common/Actions'
 
 import {
   BTS,
@@ -28,6 +28,13 @@ import MeasureControl from 'react-leaflet-measure'
 class MapC extends React.Component {
   static defaultProps = {
     users: [],
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (!props.demo) {
+      props.handleDemo(true)
+    }
+    return null
   }
 
   constructor(props) {
@@ -138,13 +145,13 @@ class MapC extends React.Component {
                 {this.props.locations.map(o => (<Location {...o} key={o.id} onClick={this.handleLocation} />))}
               </LayerGroup>
             </LayersControl.Overlay>
-            <LayersControl.Overlay name="Responders">
+            <LayersControl.Overlay checked name="Responders">
               <LayerGroup>
                 {this.props.responders.map(o => (<Responder {...o} key={o.id} onClick={this.handleResponder} />))}
               </LayerGroup>
             </LayersControl.Overlay>
             {[1, 2, 3, 4, 5].map(n => (
-              <LayersControl.Overlay key={n} name={`Users w/ ESI ${n}`}>
+              <LayersControl.Overlay checked key={n} name={`Users w/ ESI ${n}`}>
                 <LayerGroup>
                   {this.props.users.filter(u => u.esi === n).map(o => (<User {...o} key={o.id} onClick={this.handleUser} />))}
                 </LayerGroup>
@@ -164,12 +171,14 @@ class MapC extends React.Component {
 
 const mapDispatch = dispatch => ({
   handleData: v => dispatch(setData(v)),
+  handleDemo: v => dispatch(setDemo(v)),
   handleModal: (v, t) => dispatch(setModal(v, t)),
 })
 
 const mapState = state => ({
   bts: state.bts,
   cc: state.cc,
+  demo: state.demo,
   hazards: state.hazards,
   locations: state.locations,
   responders: state.responders,
