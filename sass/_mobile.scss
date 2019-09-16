@@ -72,6 +72,17 @@
         }
       }
 
+      .sms {
+        background-color: darken($white, 10%);
+        bottom: 0;
+        color: $black;
+        left: 0;
+        padding: 1vh 1vw;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
       .ussd {
         background-color: $white;
         border: 1px solid $black;

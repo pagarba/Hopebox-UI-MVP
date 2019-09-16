@@ -10,6 +10,7 @@ import {ucFirst} from '../common/Utils'
 import BTS from '../component/table/BTS'
 import Hazard from '../component/table/Hazard'
 import Location from '../component/table/Location'
+import Pagination from '../component/Pagination'
 import Responder from '../component/table/Responder'
 import User from '../component/table/User'
 import Vehicle from '../component/table/Vehicle'
@@ -20,11 +21,19 @@ class Manage extends React.Component {
       props.handleDemo(true)
     }
 
+    let modified = false
     const section = props.location.pathname.replace('/manage/', '')
     if (section !== state.section) {
       state.section = section
-      return state
+      modified = true
     }
+
+    if (props[state.section].length !== state.total) {
+      state.total = props[state.section].length
+      modified = true
+    }
+
+    if (modified) return state
     return null
   }
 
@@ -39,7 +48,10 @@ class Manage extends React.Component {
       'vehicles',
     ]
     this.state = {
+      page: 0,
       section: '',
+      size: 25,
+      total: 0,
     }
   }
 
@@ -87,8 +99,11 @@ class Manage extends React.Component {
       })
     }
 
+    const start = this.state.page * this.state.size
+    let stop = start + this.state.size
+    if (stop > this.state.total) stop = this.state.total
     return (
-      <Comp key="table" onClick={console.log} rows={rows} />
+      <Comp key="table" onClick={console.log} rows={rows.slice(start, stop)} />
     )
   }
 
@@ -102,7 +117,7 @@ class Manage extends React.Component {
               href="#"
               key={link}
               onClick={ev => this.handleRoute(ev, `/manage/${link}`)}>
-              {ucFirst(link)}
+              {link === 'bts' ? 'BTS' : ucFirst(link)}
             </a>
           ))}
         </div>
@@ -115,6 +130,12 @@ class Manage extends React.Component {
               <div className="flex-fill" />
             </div>
           }
+          <Pagination
+            onPage={this.handlePage}
+            onSize={this.handleSize}
+            page={this.state.page}
+            size={this.state.size}
+            total={this.state.total} />
           <Switch>
             <Route component={() => this.renderTable(BTS)} path="/manage/bts" />
             <Route component={() => this.renderTable(Hazard)} path="/manage/hazards" />

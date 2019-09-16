@@ -1,8 +1,6 @@
 
 import React from 'react'
 
-import Pagination from '../Pagination'
-
 import {
   Table,
   TableBody,
@@ -18,28 +16,8 @@ export default class Component extends React.Component {
     rows: [],
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if (props.rows.length !== state.total) {
-      state.total = props.rows.length
-      return state
-    }
-    return null
-  }
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      page: 0,
-      size: 25,
-    }
-  }
-
-  handlePage = page => this.setState({page})
-
-  handleSize = size => this.setState({size, page: 0})
-
   render() {
-    if (!this.state.total) {
+    if (!this.props.rows.length) {
       return (
         <table key="actual-table">
           <TableHead>
@@ -60,22 +38,11 @@ export default class Component extends React.Component {
       )
     }
 
-    const start = this.state.page * this.state.size
-    let stop = start + this.state.size
-    if (stop > this.state.total) stop = this.state.total
-
-    return [
-      <Pagination
-        key="manage-pagination"
-        onPage={this.handlePage}
-        onSize={this.handleSize}
-        page={this.state.page}
-        size={this.state.size}
-        total={this.state.total} />,
+    return (
       <Table
         cols={this.props.cols}
         key="manage-table"
-        rows={this.props.rows.slice(start, stop)} />,
-    ]
+        rows={this.props.rows} />
+    )
   }
 }
