@@ -24,11 +24,12 @@ class Manage extends React.Component {
     let modified = false
     const section = props.location.pathname.replace('/manage/', '')
     if (section !== state.section) {
+      state.page = 0
       state.section = section
       modified = true
     }
 
-    if (props[state.section].length !== state.total) {
+    if (props[state.section] && props[state.section].length !== state.total) {
       state.total = props[state.section].length
       modified = true
     }
@@ -124,10 +125,10 @@ class Manage extends React.Component {
         <div className="table flex-fill scroll">
           {this.state.section !== 'bts' && this.state.section !== 'users' &&
             <div className="flex flex-row">
-              <button className="" onClick={ev => this.handleData(ev, {})}>
-                Create
-              </button>
               <div className="flex-fill" />
+              <button className="" onClick={ev => this.handleData(ev, {})}>
+                <i className="material-icons">add_circle_outline</i> CREATE
+              </button>
             </div>
           }
           <Pagination

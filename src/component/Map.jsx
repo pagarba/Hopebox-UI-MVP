@@ -3,13 +3,10 @@ import C from '../common/Constants'
 import React from 'react'
 
 import {
-  Circle,
   FeatureGroup,
-  LayersControl,
   Marker,
   Polyline,
   Popup,
-  TileLayer,
 } from 'react-leaflet'
 import {SemiCircle} from 'react-leaflet-semicircle'
 
@@ -29,8 +26,6 @@ const keyNameById = (obj = {}, id = 1) => {
   const keys = Object.keys(obj)
   return keys[id - 1] ? keys[id - 1] : 'Unknown'
 }
-
-const ucFirst = s => `${s.slice(0, 1).toUpperCase()}${s.slice(1).toLowerCase()}`
 
 export const BTS = props => (
   <FeatureGroup color={`rgba(100, 100, 255, 0.75)`}>
@@ -79,6 +74,7 @@ export const CC = props => (
 
 export const Hazard = props => (
   <Marker
+    draggable={true}
     icon={IconById(C.MAP.MARKER.HAZARD, props.type)}
     position={{lat: props.lat, lon: props.lon}}>
     <Popup>
@@ -93,6 +89,7 @@ export const Hazard = props => (
 
 export const Location = props => (
   <Marker
+    draggable={true}
     icon={IconById(C.MAP.MARKER.LOCATION, props.type)}
     position={{lat: props.lat, lon: props.lon}}>
     <Popup>
@@ -107,6 +104,7 @@ export const Location = props => (
 
 export const Responder = props => (
   <Marker
+    draggable={true}
     icon={Icon({iconUrl: C.MAP.MARKER.RESPONDER})}
     position={{lat: props.lat, lon: props.lon}}>
     <Popup>
@@ -126,7 +124,9 @@ export const Responder = props => (
 
 export const User = props => (
   <Marker
+    draggable={true}
     icon={Icon({iconUrl: C.MAP.MARKER.USER.replace('{n}', props.esi)})}
+    onMoveEnd={props.onMoveEnd}
     position={{lat: props.lat, lon: props.lon}}>
     <Popup>
         <h4>User</h4>
@@ -144,6 +144,7 @@ export const User = props => (
 
 export const Vehicle = props => (
   <Marker
+    draggable={true}
     icon={IconById(C.MAP.MARKER.VEHICLE, props.type)}
     position={{lat: props.lat, lon: props.lon}}>
     <Popup>

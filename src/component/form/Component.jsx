@@ -43,14 +43,14 @@ export default class Component extends React.Component {
         props.fields.forEach(field => {
           state.data[field.props.name] = field.props.value || ''
         })
-      }
 
-      // Load the geolocation from the last clicked location
-      // on the map stored in local storage.
-      let geo = get(C.KEY.CLICK)
-      if (!!geo) {
-        if (!!geo.lat) state.data.lat = geo.lat
-        if (!!geo.lon) state.data.lon = geo.lon
+        // Load the geolocation from the last clicked location
+        // on the map stored in local storage.
+        let geo = get(C.KEY.CLICK)
+        if (!!geo) {
+          if (!!geo.lat) state.data.lat = geo.lat
+          if (!!geo.lon) state.data.lon = geo.lon
+        }
       }
 
       return state

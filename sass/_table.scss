@@ -117,4 +117,19 @@ table {
 .table {
   max-height: 90vh;
   overflow: hidden;
+
+  button, i {
+    border: none;
+    color: $secondary;
+    font-size: 1rem;
+    height: 2rem;
+    line-height: 1rem;
+  }
+
+  button:hover {
+    &, i {
+      background: none;
+      color: $black;
+    }
+  }
 }

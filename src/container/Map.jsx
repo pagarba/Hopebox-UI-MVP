@@ -50,13 +50,19 @@ class MapC extends React.Component {
         completedColor: '#9b2d14',
       },
       position: [props.cc.lat - C.MAP.OFFSET, props.cc.lon - C.MAP.OFFSET],
+      showCreate: false,
       zoom: 11,
     }
   }
 
+  handleCreate = showCreate => this.setState({showCreate})
+
   handleMapClick = ({latlng: {lat, lng}}) => {
     set(C.KEY.CLICK, {lat, lon: lng})
+    this.handleCreate(!this.state.showCreate)
   }
+
+  handleMapUserMove = ({target: {_latlng: {lat, lng}}}, o) => this.handleUser({...o, lat, lon: lng})
 
   handleModal = (ev, t) => {
     ev.preventDefault()
@@ -86,37 +92,41 @@ class MapC extends React.Component {
             <ZoomControl position="bottomleft" />
             <MeasureControl {...this.state.measureOptions} />
             <Control
-              className="leaflet-control-create leaflet-bar leaflet-control dropdown right"
+              className="leaflet-control-create leaflet-bar leaflet-control"
               position="topleft">
-              <a className="leaflet-control-create" href="#" onClick={ev => ev.preventDefault()}>
-                <i className="material-icons">add_circle_outline</i>
-              </a>
-              <div className="content flex flex-column" style={{width: '100px !important'}}>
-                <div className="title">Add Marker</div>
-                <a
-                  className="flex-fill"
-                  href="#"
-                  onClick={ev => this.handleModal(ev, C.MODAL.HAZARD)}>
-                  <img src={C.MAP.MARKER.HAZARD.FIRE} /> Hazard
+              <div
+                className={`dropdown right${this.state.showCreate ? ' open' : ''}`}
+                onMouseLeave={() => this.handleCreate(false)}>
+                <a className="leaflet-control-create" href="#" onClick={ev => ev.preventDefault()}>
+                  <i className="material-icons">add_circle_outline</i>
                 </a>
-                <a
-                  className="flex-fill"
-                  href="#"
-                  onClick={ev => this.handleModal(ev, C.MODAL.LOCATION)}>
-                  <img src={C.MAP.MARKER.LOCATION.MEDICAL} /> Location
-                </a>
-                <a
-                  className="flex-fill"
-                  href="#"
-                  onClick={ev => this.handleModal(ev, C.MODAL.RESPONDER)}>
-                  <img src={C.MAP.MARKER.RESPONDER} /> Responder
-                </a>
-                <a
-                  className="flex-fill"
-                  href="#"
-                  onClick={ev => this.handleModal(ev, C.MODAL.VEHICLE)}>
-                  <img src={C.MAP.MARKER.VEHICLE.BUS} /> Vehicle
-                </a>
+                <div className="content flex flex-column" style={{width: '100px !important'}}>
+                  <div className="title">Add Marker</div>
+                  <a
+                    className="flex-fill"
+                    href="#"
+                    onClick={ev => this.handleModal(ev, C.MODAL.HAZARD)}>
+                    <img src={C.MAP.MARKER.HAZARD.FIRE} /> Hazard
+                  </a>
+                  <a
+                    className="flex-fill"
+                    href="#"
+                    onClick={ev => this.handleModal(ev, C.MODAL.LOCATION)}>
+                    <img src={C.MAP.MARKER.LOCATION.MEDICAL} /> Location
+                  </a>
+                  <a
+                    className="flex-fill"
+                    href="#"
+                    onClick={ev => this.handleModal(ev, C.MODAL.RESPONDER)}>
+                    <img src={C.MAP.MARKER.RESPONDER} /> Responder
+                  </a>
+                  <a
+                    className="flex-fill"
+                    href="#"
+                    onClick={ev => this.handleModal(ev, C.MODAL.VEHICLE)}>
+                    <img src={C.MAP.MARKER.VEHICLE.BUS} /> Vehicle
+                  </a>
+                </div>
               </div>
             </Control>
             {C.MAP.TILE_SERVERS.map(o => (
@@ -153,7 +163,13 @@ class MapC extends React.Component {
             {[1, 2, 3, 4, 5].map(n => (
               <LayersControl.Overlay checked key={n} name={`Users w/ ESI ${n}`}>
                 <LayerGroup>
-                  {this.props.users.filter(u => u.esi === n).map(o => (<User {...o} key={o.id} onClick={this.handleUser} />))}
+                  {this.props.users.filter(u => u.esi === n).map(o => (
+                    <User
+                      {...o}
+                      key={o.id}
+                      onClick={this.handleUser}
+                      onMoveEnd={ev => this.handleMapUserMove(ev, o)} />
+                  ))}
                 </LayerGroup>
               </LayersControl.Overlay>
             ))}
