@@ -31,6 +31,7 @@ export const BTS = props => (
   <FeatureGroup color={`rgba(100, 100, 255, 0.75)`}>
     <Marker
       icon={Icon({iconUrl: C.MAP.MARKER.BTS})}
+      onMoveEnd={props.onMoveEnd}
       position={{lat: props.lat, lon: props.lon}}>
       <Popup>
         <h4>BTS</h4>
@@ -76,6 +77,7 @@ export const Hazard = props => (
   <Marker
     draggable={true}
     icon={IconById(C.MAP.MARKER.HAZARD, props.type)}
+    onMoveEnd={props.onMoveEnd}
     position={{lat: props.lat, lon: props.lon}}>
     <Popup>
       <h4>Hazard</h4>
@@ -91,6 +93,7 @@ export const Location = props => (
   <Marker
     draggable={true}
     icon={IconById(C.MAP.MARKER.LOCATION, props.type)}
+    onMoveEnd={props.onMoveEnd}
     position={{lat: props.lat, lon: props.lon}}>
     <Popup>
       <h4>Location</h4>
@@ -106,6 +109,7 @@ export const Responder = props => (
   <Marker
     draggable={true}
     icon={Icon({iconUrl: C.MAP.MARKER.RESPONDER})}
+    onMoveEnd={props.onMoveEnd}
     position={{lat: props.lat, lon: props.lon}}>
     <Popup>
         <h4>Responder</h4>
@@ -114,8 +118,6 @@ export const Responder = props => (
         <div>BTS: {props.bts}</div>
         <div>IMSI: {props.imsi}</div>
         <div>MSISDN: {props.msisdn}</div>
-        <div>Vehicle: {props.vehicle}</div>
-        <div>Tags: {props.tags}</div>
         <div>Notes: {props.notes}</div>
         <button onClick={() => props.onClick(props)}>MANAGE</button>
     </Popup>
@@ -135,7 +137,6 @@ export const User = props => (
         <div>BTS: {props.bts}</div>
         <div>IMSI: {props.imsi}</div>
         <div>MSISDN: {props.msisdn}</div>
-        <div>Tags: {props.tags}</div>
         <div>Notes: {props.notes}</div>
         <button onClick={() => props.onClick(props)}>MANAGE</button>
     </Popup>
@@ -146,6 +147,7 @@ export const Vehicle = props => (
   <Marker
     draggable={true}
     icon={IconById(C.MAP.MARKER.VEHICLE, props.type)}
+    onMoveEnd={props.onMoveEnd}
     position={{lat: props.lat, lon: props.lon}}>
     <Popup>
       <h4>Vehicle</h4>

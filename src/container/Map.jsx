@@ -62,7 +62,12 @@ class MapC extends React.Component {
     this.handleCreate(!this.state.showCreate)
   }
 
+  handleMapBTSMove = ({target: {_latlng: {lat, lng}}}, o) => this.handleBTS({...o, lat, lon: lng})
+  handleMapHazardMove = ({target: {_latlng: {lat, lng}}}, o) => this.handleHazard({...o, lat, lon: lng})
+  handleMapLocationMove = ({target: {_latlng: {lat, lng}}}, o) => this.handleLocation({...o, lat, lon: lng})
+  handleMapResponderMove = ({target: {_latlng: {lat, lng}}}, o) => this.handleResponder({...o, lat, lon: lng})
   handleMapUserMove = ({target: {_latlng: {lat, lng}}}, o) => this.handleUser({...o, lat, lon: lng})
+  handleMapVehicleMove = ({target: {_latlng: {lat, lng}}}, o) => this.handleVehicle({...o, lat, lon: lng})
 
   handleModal = (ev, t) => {
     ev.preventDefault()
@@ -142,22 +147,46 @@ class MapC extends React.Component {
             </LayersControl.Overlay>
             <LayersControl.Overlay checked name="BTS">
               <LayerGroup>
-                {this.props.bts.map(o => (<BTS {...o} key={o.id} onClick={this.handleBTS} />))}
+                {this.props.bts.map(o => (
+                  <BTS
+                    {...o}
+                    key={o.id}
+                    onClick={this.handleBTS}
+                    onMoveEnd={ev => this.handleMapBTSMove(ev, o)} />
+                ))}
               </LayerGroup>
             </LayersControl.Overlay>
             <LayersControl.Overlay checked name="Hazards">
               <LayerGroup>
-                {this.props.hazards.map(o => (<Hazard {...o} key={o.id} onClick={this.handleHazard} />))}
+                {this.props.hazards.map(o => (
+                  <Hazard
+                    {...o}
+                    key={o.id}
+                    onClick={this.handleHazard}
+                    onMoveEnd={ev => this.handleMapHazardMove(ev, o)} />
+                ))}
               </LayerGroup>
             </LayersControl.Overlay>
             <LayersControl.Overlay checked name="Locations">
               <LayerGroup>
-                {this.props.locations.map(o => (<Location {...o} key={o.id} onClick={this.handleLocation} />))}
+                {this.props.locations.map(o => (
+                  <Location
+                    {...o}
+                    key={o.id}
+                    onClick={this.handleLocation}
+                    onMoveEnd={ev => this.handleMapLocationMove(ev, o)} />
+                  ))}
               </LayerGroup>
             </LayersControl.Overlay>
             <LayersControl.Overlay checked name="Responders">
               <LayerGroup>
-                {this.props.responders.map(o => (<Responder {...o} key={o.id} onClick={this.handleResponder} />))}
+                {this.props.responders.map(o => (
+                  <Responder
+                    {...o}
+                    key={o.id}
+                    onClick={this.handleResponder}
+                    onMoveEnd={ev => this.handleMapResponderMove(ev, o)} />
+                ))}
               </LayerGroup>
             </LayersControl.Overlay>
             {[1, 2, 3, 4, 5].map(n => (
@@ -175,7 +204,13 @@ class MapC extends React.Component {
             ))}
             <LayersControl.Overlay checked name="Vehicles">
               <LayerGroup>
-                {this.props.vehicles.map(o => (<Vehicle {...o} key={o.id} key={o.id} onClick={this.handleVehicle} />))}
+                {this.props.vehicles.map(o => (
+                  <Vehicle
+                    {...o}
+                    key={o.id}
+                    onClick={this.handleVehicle}
+                    onMoveEnd={ev => this.handleMapVehicleMove(ev, o)} />
+                ))}
               </LayerGroup>
             </LayersControl.Overlay>
           </LayersControl>
